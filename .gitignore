@@ -1,0 +1,8 @@
+# node
+node_modules/
+
+# working file folders
+templates/
+
+# settings
+.env
