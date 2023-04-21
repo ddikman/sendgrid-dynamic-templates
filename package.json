@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "upload": "node upload.js",
+    "generate": "node generate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

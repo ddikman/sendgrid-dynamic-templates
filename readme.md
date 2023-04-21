@@ -24,6 +24,20 @@ Template [Login email] (d-a2176d95113e410caf19c145dc5e5882) version [Aug-22 Foot
 
 I recommend you start with just a single template file in the `templates/` directory to see if everything works as expected. You might even want to create a new template first and test with.
 
+## API Key requirements
+
+For the API key, it only requires the `Template Engine` permissions so you can keep it slim reduce the risk.
+
+![Only Template Engine permissions are required](./required-permisson.png)
+
+## Generating template files
+
+Although you can use this tool by just placing your email templates in the `templates/` folder and use only the upload function, you will likely want to generate your email templates using layouts as well.
+
+You do this by adding your template layout in `layouts/your-template.html` and then your emails, prefixed with the template name in `emails/your-template_d-123xxx.html`.
+
+When you run `yarn generate` that will loop through all emails in the `emails/` folder and output them to `templates/` replacing the `<!-- EMAIL CONTENT -->` with the contents of your email.
+
 ## Limitations
 
 You must have the template created in Sendgrid first with a version.
