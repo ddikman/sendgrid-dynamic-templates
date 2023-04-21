@@ -1,11 +1,12 @@
 {
   "name": "sendgrid-dynamic-templates",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Tool to generate dynamic templates and upload to Sendgrid",
   "main": "index.js",
   "scripts": {
     "upload": "node bin/upload.js",
     "generate": "node bin/generate.js",
+    "download": "node bin/download.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {

@@ -4,8 +4,43 @@ if (process.env.SENDGRID_API_KEY === undefined) {
     throw new Error("SENDGRID_API_KEY environment variable not set");
 }
 
+// See Sendgrid API docs
+// https://docs.sendgrid.com/api-reference/transactional-templates
+
 const sgClient = new Client();
 sgClient.setApiKey(process.env.SENDGRID_API_KEY);
+
+async function downloadTemplates() {
+    const [, body] = await sgClient.request({
+        url: `/v3/templates`,
+        method: 'GET',
+        qs: {
+            generations: 'dynamic',
+            page_size: 100
+        }
+    })
+
+    console.log(`Found ${body.result.length} templates. Downloading...`)
+
+    const templates = []
+    for (const template of body.result) {
+        const activeVersion = template.versions.find((version) => version.active)
+        if (!activeVersion) {
+            console.log(`Template ${template.name} has no active version, skipping`)
+            continue
+        }
+
+        console.log(`Downloading template ${template.name} version ${activeVersion.name}...`)
+        const versionDetails = await getExistingVersion(template.id, activeVersion.id)
+        templates.push({
+            name: template.name,
+            id: template.id,
+            content: versionDetails.content
+        })
+    }
+
+    return templates
+}
 
 async function getExistingTemplate(templateId) {
     try {
@@ -30,7 +65,8 @@ async function getExistingVersion(templateId, versionId) {
 
     return {
         testData: body.test_data,
-        subject: body.subject
+        subject: body.subject,
+        content: body.html_content
     }
 }
 
@@ -43,7 +79,7 @@ async function uploadTemplate(templateId, templateContent, uploadOptions) {
     if (!existingVersion) {
         throw `Template ${templateId} has no versions, please create one in the SendGrid UI first`
     }
-    
+
     const data = {
         name: increaseVersion ? versionName : existingVersion.name,
         html_content: templateContent
@@ -52,7 +88,7 @@ async function uploadTemplate(templateId, templateContent, uploadOptions) {
     if (increaseVersion) {
         const existingVersionDetails = await getExistingVersion(templateId, existingVersion.id)
         data.subject = existingVersionDetails.subject,
-        data.test_data = existingVersionDetails.testData
+            data.test_data = existingVersionDetails.testData
         data.active = 1
     }
 
@@ -73,5 +109,6 @@ async function uploadTemplate(templateId, templateContent, uploadOptions) {
 
 module.exports = {
     getExistingTemplate,
-    uploadTemplate
+    uploadTemplate,
+    downloadTemplates
 }

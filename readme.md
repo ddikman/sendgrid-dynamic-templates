@@ -30,6 +30,7 @@ You can also install this globally and use it as a pure command line tool:
 
 ```
 npm install -g sendgrid-dynamic-templates
+download-sendgrid-templates
 generate-sendgrid-templates
 upload-sendgrid-templates
 ```
@@ -51,6 +52,14 @@ You do this by adding your template layout in `layouts/your-template.html` and t
 
 When you run `yarn generate` that will loop through all emails in the `emails/` folder and output them to `templates/` replacing the `<!-- EMAIL CONTENT -->` with the contents of your email.
 
+## Downloading existing templates
+
+To make things even easier, you can also download the templates you have created already. For example, if someone manually updates one of the templates, you can use this tool to download all existing templates for the next bulk update. Just run `yarn download` or `npx download-sendgrid-templates`.
+
+Please note that this action is destructive, it will overwrite any local templates.
+
 ## Limitations
 
 You must have the template created in Sendgrid first with a version.
+
+When downloading the templates, they will be as-they-are, meaning any previously applied template will have to be manually stripped and the layout name updated.
