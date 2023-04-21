@@ -1,12 +1,14 @@
+#! /usr/bin/env node
+
 const fs = require('fs').promises;
 const path = require('path');
-const getEmailFiles = require('./src/get-email-files');
-const getUnique = require('./src/get-unique');
+const getEmailFiles = require('../src/get-email-files');
+const getUnique = require('../src/get-unique');
 
 // Define the paths to the layouts, emails, and templates directories
-const layoutsDir = path.join(__dirname, 'layouts');
-const emailsDir = path.join(__dirname, 'emails');
-const templatesDir = path.join(__dirname, 'templates');
+const layoutsDir = path.join(process.cwd(), 'layouts');
+const emailsDir = path.join(process.cwd(), 'emails');
+const templatesDir = path.join(process.cwd(), 'templates');
 
 const replaceMarker = '<!-- EMAIL CONTENT -->'
 

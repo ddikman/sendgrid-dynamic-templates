@@ -7,9 +7,11 @@ async function getTemplateFiles(templatesDir) {
   for (const fileName of fileNames) {
     if (!fileName.endsWith('.html')) {
       console.log(`Skipping non-HTML file: ${fileName}`);
+      continue
     }
     if (!fileName.startsWith('d-')) {
       console.log(`Skipping non-dynamic template file (must follow format d-xxx): ${fileName}`);
+      continue
     }
 
     const templateId = fileName.replace('.html', '');

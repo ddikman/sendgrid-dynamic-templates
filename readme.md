@@ -24,6 +24,19 @@ Template [Login email] (d-a2176d95113e410caf19c145dc5e5882) version [Aug-22 Foot
 
 I recommend you start with just a single template file in the `templates/` directory to see if everything works as expected. You might even want to create a new template first and test with.
 
+### Command line tools
+
+You can also install this globally and use it as a pure command line tool:
+
+```
+npm install -g sendgrid-dynamic-templates
+generate-sendgrid-templates
+upload-sendgrid-templates
+```
+
+Or using `npx` to install if it isn't installed already.
+
+
 ## API Key requirements
 
 For the API key, it only requires the `Template Engine` permissions so you can keep it slim reduce the risk.

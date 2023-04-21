@@ -1,15 +1,23 @@
 {
   "name": "sendgrid-dynamic-templates",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tool to generate dynamic templates and upload to Sendgrid",
   "main": "index.js",
   "scripts": {
-    "upload": "node upload.js",
-    "generate": "node generate.js",
+    "upload": "node bin/upload.js",
+    "generate": "node bin/generate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "bin": {
+    "generate-sendgrid-templates": "bin/generate.js",
+    "upload-sendgrid-templates": "bin/upload.js"
+  },
+  "author": "David Dikman @almundgrey",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ddikman/sendgrid-dynamic-templates"
+  },
   "dependencies": {
     "@sendgrid/client": "^7.7.0",
     "dotenv": "^16.0.3",
