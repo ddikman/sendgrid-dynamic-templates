@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.3] - 2023-04-24
+
+Added error handling for upload requests that fail with error.
+
 ## [1.1.2] - 2023-04-21
 
 Added a `download` script to help get started.

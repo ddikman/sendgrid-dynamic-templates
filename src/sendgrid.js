@@ -97,13 +97,24 @@ async function uploadTemplate(templateId, templateContent, uploadOptions) {
         method: increaseVersion ? 'POST' : 'PATCH',
         body: data,
     };
-    const [response,] = await sgClient.request(request);
-    if (response.statusCode === 200) {
-        console.log(`Template [${existingTemplate.name}] (${templateId}) version [${existingVersion.name}] updated`)
-    } else if (response.statusCode === 201) {
-        console.log(`Template [${existingTemplate.name}] (${templateId}) version [${versionName}] created and activated`)
-    } else {
-        console.log(`Unknown status code from updating ${templateId}: ${response.statusCode}, please confirm result`)
+
+    try {
+        const [response,] = await sgClient.request(request);
+
+        if (response.statusCode === 200) {
+            console.log(`Template [${existingTemplate.name}] (${templateId}) version [${existingVersion.name}] updated`)
+        } else if (response.statusCode === 201) {
+            console.log(`Template [${existingTemplate.name}] (${templateId}) version [${versionName}] created and activated`)
+        } else {
+            console.log(`Unknown status code from updating ${templateId}: ${response.statusCode}, please confirm result`)
+        }
+    } catch (err) {
+        if (err.code === 400) {
+            console.error(`Template [${existingTemplate.name}] (${templateId}) version [${existingVersion.name}] not updated due to error:`)
+            console.error(JSON.stringify(err.response.body, null, 2))
+            return
+        }
+        throw `[${templateId}] [${err.code}] ${err.response?.body?.error}`; 
     }
 }
 
