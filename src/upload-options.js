@@ -19,6 +19,15 @@ function confirmTemplateDir(templateDir) {
     })
 }
 
+function askForTemplateToUpload() {
+    return new Promise((resolve) => {
+        readline.question('Enter the id of the template to upload or press enter to upload all templates: ', (answer) => {
+            const templateId = answer.trim().length > 0 ? answer.trim() : null;
+            resolve(templateId);
+        })
+    })
+}
+
 function askForVersionName() {
     return new Promise((resolve) => {
         readline.question(
@@ -47,9 +56,12 @@ function getUploadOptions(templateDir) {
     const options = {
         increaseVersion: false,
         versionName: null,
+        templateId: null
     }
     return new Promise(async (resolve) => {
         await confirmTemplateDir(templateDir);
+
+        options.templateId = await askForTemplateToUpload();
 
         options.increaseVersion = await askForVersionIncrease();
         if (options.increaseVersion) {

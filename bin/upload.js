@@ -14,6 +14,10 @@ async function main(){
     const uploadOptions = await getUploadOptions(templatesDir);
     const files = await getTemplateFiles(templatesDir);
     for (const file of files) {
+        if (uploadOptions.templateId && file.templateId !== uploadOptions.templateId) {
+            console.log(`Only uploading template with id [${uploadOptions.templateId}]. Skipping ${file.templateId}...`);
+            continue
+        }
         await uploadTemplate(file.templateId, file.templateContent, uploadOptions);
     }
 }

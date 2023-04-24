@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.0] - 2023-04-24
+
+Added so that single templates can be uploaded.
+
 ## [1.1.3] - 2023-04-24
 
 Added error handling for upload requests that fail with error.
