@@ -24,6 +24,14 @@ Template [Login email] (d-a2176d95113e410caf19c145dc5e5882) version [Aug-22 Foot
 
 I recommend you start with just a single template file in the `templates/` directory to see if everything works as expected. You might even want to create a new template first and test with.
 
+### Example
+
+This repository comes with an example layout and emails. Since the emails need to be identified to match the `Dynamic Templates` created inside your own Sendgrid instance, these will not work on your Sendgrid but please refer to them as an example of how to name the files.
+
+You will see how the filename of the email content files in the `emails` folder matches the ID of the template in Sendgrid:
+
+![Example of template id in Sendgrid](./template-id-example.png)
+
 ### Command line tools
 
 You can also install this globally and use it as a pure command line tool:
@@ -42,7 +50,7 @@ Or using `npx` to install if it isn't installed already.
 
 For the API key, it only requires the `Template Engine` permissions so you can keep it slim reduce the risk.
 
-![Only Template Engine permissions are required](./required-permisson.png)
+![Only Template Engine permissions are required](./required-permission.png)
 
 ## Generating template files
 
