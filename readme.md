@@ -24,6 +24,24 @@ Template [Login email] (d-a2176d95113e410caf19c145dc5e5882) version [Aug-22 Foot
 
 I recommend you start with just a single template file in the `templates/` directory to see if everything works as expected. You might even want to create a new template first and test with.
 
+### Name formatting
+
+To avoid needing any additional configuration files, the email templates are linked to layouts and dynamic templates in sendgrid using a prefix and suffix in the filename.
+
+The layout files in `/layouts` can be named whatever you want but the emails in the `/emails` folder must follow the following format:
+
+```
+{layout-name}_{sendgrid-dynamic-template-id}.html
+```
+
+For example
+
+```
+example-layout_d-df93f2a7608d448b8897e890740c72ec.html
+```
+
+Where `example-layout` is the filename (without extension) of the layout to use and `d-df93f2a7608d448b8897e890740c72ec` is the template ID you can find in Sendgrid.
+
 ### Example
 
 This repository comes with an example layout and emails. Since the emails need to be identified to match the `Dynamic Templates` created inside your own Sendgrid instance, these will not work on your Sendgrid but please refer to them as an example of how to name the files.
